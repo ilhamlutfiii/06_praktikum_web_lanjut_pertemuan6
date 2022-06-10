@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-
-
+use PDF;
 
 class ArticleController extends Controller
 {
@@ -15,10 +14,17 @@ class ArticleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function cetak_pdf()
+    {
+        $articles = Article::all();
+        $pdf = PDF::loadview('articles.articles_pdf', compact('articles'));
+        return $pdf->stream();
+    }
+    
     public function index()
     {
         $articles = Article::all();
-        return view('articles.index', ['articles' => $articles]);
+        return view('articles.index', compact('articles'));
     }
 
     /**
@@ -39,16 +45,18 @@ class ArticleController extends Controller
      */
     public function store(Request $request)
     {
-        if($request->file('image')){
+        if ($request->file('image')) {
             $image_name = $request->file('image')->store('images', 'public');
         }
 
         Article::create([
-            'title' => $request->title,
-            'content' => $request->content,
-            'featured_image' => $image_name
+            'title'             => $request->title,
+            'content'           => $request->content,
+            'featured_image'    => $image_name
         ]);
-        return redirect()->route('articles.index')
+
+        return redirect()
+            ->route('articles.index')
             ->with('success', 'Artikel Berhasil Ditambahkan');
     }
 
@@ -73,7 +81,7 @@ class ArticleController extends Controller
     {
         $article = Article::find($id);
 
-        return view('articles.edit', ['article' => $article]);
+        return view('articles.edit', compact('article'));
     }
 
     /**
@@ -114,4 +122,6 @@ class ArticleController extends Controller
     {
         //
     }
+
+    
 }
