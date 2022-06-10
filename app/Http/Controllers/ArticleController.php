@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use Barryvdh\DomPDF\Facade\PDF;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class ArticleController extends Controller
 {
@@ -17,7 +17,7 @@ class ArticleController extends Controller
     public function cetak_pdf()
     {
         $articles = Article::all();
-        $pdf = PDF::loadview('articles.articles_pdf', compact('articles'));
+        $pdf = Pdf::loadview('articles.articles_pdf', compact('articles'));
         return $pdf->stream();
     }
 
