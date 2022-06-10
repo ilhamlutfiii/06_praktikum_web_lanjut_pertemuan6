@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
-use PDF;
+use Barryvdh\DomPDF\Facade\PDF;
 
 class ArticleController extends Controller
 {
@@ -20,7 +20,7 @@ class ArticleController extends Controller
         $pdf = PDF::loadview('articles.articles_pdf', compact('articles'));
         return $pdf->stream();
     }
-    
+
     public function index()
     {
         $articles = Article::all();

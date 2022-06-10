@@ -17,8 +17,7 @@
         <h5>Laporan Artikel</h4>
     </center>
 
-    <table class='table table-bordered' style="width:95%;margin:
-0 auto;">
+    <table class='table table-bordered' style="width:95%;margin:0 auto;">
         <thead>
             <tr>
                 <th>Judul</th>

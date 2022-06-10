@@ -7,6 +7,11 @@
 @endif
 <table class="table table-bordered" style="width:95%;margin: 0
 auto;">
+        <div class="row">
+            <div style="margin:0px 0px 0px 70px;">
+                <a class="btn btn-succes" href="{{ route('cetak_pdf') }}"> Cetak PDF </a>
+            </div>
+        </div><br/>
     <tr>
         <th>Judul</th>
         <th>Konten</th>
@@ -14,11 +19,7 @@ auto;">
     </tr>
     @foreach ($articles as $article)
     <tr>
-        <div class="row">
-            <div style="margin:0px 0px 0px 70px;">
-                <a class="btn btn-succes" href="{{ route('cetak_pdf') }}"> Cetak PDF </a>
-            </div>
-        </div><br/>
+        
         <td><a href="{{ route('articles.edit',['article'=>$article->id]) }}">{{$article->title }}</a></td>
         <td>{{ $article->content }}</td>
         <td><img width="150px" src="{{asset('storage/'.$article->featured_image)}}"></td>
